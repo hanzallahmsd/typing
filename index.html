@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Code Magpie - Typing</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="balloons-container"></div>
+    <input type="text" id="my-input" />
+    <div style="color: yellowgreen">Your score: <span id="score">0</span></div>
+    <div style="color: red">Typos: <span id="typos">0</span></div>
+    <div style="color: yellow">Your score: <span id="missed">0</span></div>
+
+    <script>
+      const body = document.body;
+      const elements = [];
+      const myInput = document.getElementById("my-input");
+      const scoreSpan = document.getElementById("score");
+      const typeAudio = new Audio("type.mp3")
+      const wrongAudio = new Audio("wrong.mp3")
+      const missedCount = 0
+      let score = 0
+      const limit = 100
+      let counter = 0
+
+      myInput.addEventListener("keyup", (e) => {
+        const thisInput = e.target;
+        if (thisInput.value === elements[0].innerText) {
+          body.style.background = "green"
+          typeAudio.play()
+          score += 1
+          scoreSpan.innerText = score
+        }else{
+          body.style.background = "black"
+          wrongAudio.play()
+        }
+        thisInput.value = ""
+        removeThisElement(elements[0])
+        
+      });
+      body.addEventListener("click", () => start());
+      let started = false;
+
+      const random = (num) => {
+        return Math.floor(Math.random() * num);
+      };
+
+      const chars = "abcdefgijklmnopqrstuvwxyz";
+      let createInterval = null;
+
+      function start() {
+        if (started) return;
+        started = true;
+        createInterval = setInterval(() => {
+          createDiv();
+          checkIfOutOfView()
+        }, 1000);
+        
+      }
+
+
+      function createDiv() {
+        const div = document.createElement("div");
+        div.innerText = chars[random(chars.length)];
+        div.className = "ball";
+        elements.push(div);
+        body.append(div);
+        // if(counter >= limit){
+        //   clearInterval(createInterval)
+        // }
+        // counter += 1
+      }
+
+      const checkIfOutOfView = () => {
+        const ele = elements[0]
+        const br = ele.getBoundingClientRect()
+        console.log(br);
+        if(br.x <= 0){
+          removeThisElement(ele)
+          body.classList.remove('shake-it')
+          body.classList.add('shake-it')
+        }
+      }
+
+      function removeThisElement(ele){
+        ele.remove()
+        elements.shift()
+      }
+    </script>
+  </body>
+</html>
