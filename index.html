@@ -19,6 +19,7 @@
     <script>
       const body = document.body;
       const elements = [];
+      const colors = ["tomato", "yellow", "lightgreen", "white", "pink"]
       const myInput = document.getElementById("my-input");
       const scoreSpan = document.getElementById("score");
       const typosSpan = document.getElementById("typos");
@@ -76,6 +77,7 @@
         const div = document.createElement("div");
         div.innerText = chars[random(chars.length)];
         div.className = "ball";
+        div.style.background = colors[random(colors.length)]
         elements.push(div);
         body.append(div);
         totalCount += 1;
