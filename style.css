@@ -6,7 +6,7 @@ html, body{
     color: yellow;
 }
 body{
-    background: url("https://w0.peakpx.com/wallpaper/917/583/HD-wallpaper-red-black-square-boxes-abstract.jpg");
+    background: url("bg.png");
     background-size: cover;
 }
 #my-input{

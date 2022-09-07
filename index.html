@@ -9,30 +9,37 @@
     <input type="text" id="my-input" />
     <div style="color: yellowgreen">Your score: <span id="score">0</span></div>
     <div style="color: red">Typos: <span id="typos">0</span></div>
-    <div style="color: yellow">Your score: <span id="missed">0</span></div>
+    <div style="color: yellow">Missed: <span id="missed">0</span></div>
+    <div style="color: yellow">Total: <span id="total">0</span></div>
 
     <script>
       const body = document.body;
       const elements = [];
       const myInput = document.getElementById("my-input");
       const scoreSpan = document.getElementById("score");
+      const typosSpan = document.getElementById("typos");
+      const missedSpan = document.getElementById("missed");
+      const totalSpan = document.getElementById("total");
+
       const typeAudio = new Audio("type.mp3")
       const wrongAudio = new Audio("wrong.mp3")
-      const missedCount = 0
+      let missedCount = 0
       let score = 0
+      let typosCount = 0
       const limit = 100
       let counter = 0
+      let totalCount = 0
 
       myInput.addEventListener("keyup", (e) => {
         const thisInput = e.target;
         if (thisInput.value === elements[0].innerText) {
-          body.style.background = "green"
           typeAudio.play()
           score += 1
           scoreSpan.innerText = score
         }else{
-          body.style.background = "black"
           wrongAudio.play()
+          typosCount += 1
+          typosSpan.innerText = typosCount
         }
         thisInput.value = ""
         removeThisElement(elements[0])
@@ -65,6 +72,8 @@
         div.className = "ball";
         elements.push(div);
         body.append(div);
+        totalCount += 1
+        totalSpan.innerText = totalCount
         // if(counter >= limit){
         //   clearInterval(createInterval)
         // }
@@ -79,6 +88,8 @@
           removeThisElement(ele)
           body.classList.remove('shake-it')
           body.classList.add('shake-it')
+          missedCount += 1
+          missedSpan.innerText = missedCount
         }
       }
 
