@@ -6,6 +6,9 @@ html, body{
     color: yellow;
 }
 body{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
     background: url("bg.png");
     background-size: cover;
 }
@@ -22,6 +25,10 @@ body{
 }
 .ball {
     position: absolute;
+    text-shadow: -2px 2px 4px 
+            rgba(0, 0, 0, 0.5), 
+            2px -2px 0 
+            rgba(255, 255, 255, 0.9);
     font-size: 80px;
     line-height: 100%;
     text-align: center;
@@ -37,10 +44,10 @@ body{
   
 @keyframes bounce {
     0%{
-        translate: 1500px 200px;
+        translate: 110vw 200px;
     }
     100%{
-        translate: -300px 200px;
+        translate: -100px 200px;
     }
 }
 
